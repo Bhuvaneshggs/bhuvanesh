@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> SBCEC</title>
-    <link rel="icon" type="png" href="logo.png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +46,7 @@
             padding: 10px 0;
             font-size: 16px;
             color: #fff;
-            margin-bottom: 15px;
+            margin-bottom: 30px;
             border: none;
             border-bottom: 1px solid #fff;
             outline: none;
@@ -193,118 +191,102 @@
 </head>
 <body>
 <div class="login-box">
-    <center><img src="logo.png" alt="LOGO" width="150" height="150"><br>
-        <br>
-    <h2>IT TECH TEAM</h2>
+    <center><img src="https://www.sbcecarni.com/images/sbcec_final.png" alt="LOGO" width="300" height="80"><br>
+    <h2>IT TECH TEAM LOGIN</h2>
     <form id="form">
         <div class="user-box">
-            <input type="text" name="" required=""
-              id="Name"
-              name="Name"
-              list="Names"
-          />
-            <label>Name</label>
-            <datalist id="Names">
-              <!-- javascript will add options here -->
-          </datalist>
-          <div class="user-box">
-            <input type="number" name="" required=""
-              id="Phone"
-              name="Phone"
-              list="Phones"
-            />
-              <label>Phone</label>
-              <datalist id="Phones">
-                  <!-- javascript will add options here -->
-              </datalist>
-            </div>
-            <div class="user-box">
-              <input type="email" name="" required=""
-                id="Mail"
-                name="Mail"
-                list="Mail"
-            />
-              <label>Mail ID</label>
-              <datalist id="Mails">
-                  <!-- javascript will add options here -->
-              </datalist>
-            </div>
-            <div class="user-box">
-              <input type="text" name="" required=""
-                id="Message"
-                name="Message"
-                list="Messages"
-            />
-              <label>Message</label>
-              <datalist id="Messages">
-                  <!-- javascript will add options here -->
-              </datalist>
-        <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
-        </form>
+            <input type="text" id="Name" name="Name" list="Names"/>
+        <label for="Name">Name</label>
+        <datalist id="Names">
+            <!-- Options will be added dynamically -->
+        </datalist>
     </div>
-    
-    <!-- Success Popup -->
-    <div id="success-popup" class="alert alert-success alert-dismissible fade" role="alert">
-        <strong>Success!</strong> Your form has been submitted successfully.
-        <button type="button" class="btn-close" onclick="closeSuccessPopup()"></button>
+    <div class="user-box">
+        <input type="number" id="Phone" name="Phone" list="Phones" />
+        <label for="Phone">Phone</label>
+        <datalist id="Phones">
+            <!-- Options will be added dynamically -->
+        </datalist>
     </div>
-    
-    <script>
-        const url = "https://script.google.com/macros/s/AKfycbxr70scFKpoFALuiuSU5Dy01vIuId3n9UVEXNlvF-T3l17EwN1oBk3uPidAMnUD7HpTmw/exec"; // enter your public ('access' - 'anyone') deployment URL (NOT test deployment!)
-        const form = document.getElementById('form');
-        const submitBtn = document.getElementById('submitBtn');
-        const successPopup = document.getElementById('success-popup');
-        const snackbar = document.getElementById('snackbar');
-    
-        form.action = url;
-    
-        // Function to handle form submission
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission behavior
-    
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = 'Submitting...';
-    
-            const formData = new FormData(this); // Get form data
-    
-            // Send form data via fetch
-            fetch(url, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Show success popup
-                    successPopup.classList.add('show');
-                    // Reset the form
-                    form.reset();
-                    // Reset the submit button
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = 'Submit';
-                    // Optional: You can redirect to another page after submission
-                    // window.location.href = "next-page.html";
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .catch(error => {
-                console.error('Error submitting form:', error);
+    <div class="user-box">
+        <input type="email" id="Mail" name="Mail" list="Mails" />
+        <label for="Mail">Mail ID</label>
+        <datalist id="Mails">
+            <!-- Options will be added dynamically -->
+        </datalist>
+    </div>
+    <div class="user-box">
+        <textarea id="Message" name="Message" maxlength="200"></textarea>
+        <label for="Message">Message</label>
+    </div>
+    <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+    </form>
+</div>
+
+<!-- Success Popup -->
+<div id="success-popup" class="alert alert-success alert-dismissible fade" role="alert">
+    <strong>Success!</strong> Your form has been submitted successfully.
+    <button type="button" class="btn-close" onclick="closeSuccessPopup()"></button>
+</div>
+
+<!-- Snackbar for error handling -->
+<div id="snackbar">Error submitting form. Please try again later.</div>
+
+<script>
+    const url = "https://script.google.com/macros/s/AKfycbxr70scFKpoFALuiuSU5Dy01vIuId3n9UVEXNlvF-T3l17EwN1oBk3uPidAMnUD7HpTmw/exec"; // enter your public ('access' - 'anyone') deployment URL (NOT test deployment!)
+    const form = document.getElementById('form');
+    const submitBtn = document.getElementById('submitBtn');
+    const successPopup = document.getElementById('success-popup');
+    const snackbar = document.getElementById('snackbar');
+
+    form.action = url;
+
+    // Function to handle form submission
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Submitting...';
+
+        const formData = new FormData(this); // Get form data
+
+        // Send form data via fetch
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Show success popup
+                successPopup.classList.add('show');
+                // Reset the form
+                form.reset();
+                // Reset the submit button
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Submit';
-                // Show snackbar for error handling
-                snackbar.classList.add('show');
-                // Hide snackbar after 3 seconds
-                setTimeout(() => {
-                    snackbar.classList.remove('show');
-                }, 3000);
-            });
+                // Optional: You can redirect to another page after submission
+                // window.location.href = "next-page.html";
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        })
+        .catch(error => {
+            console.error('Error submitting form:', error);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Submit';
+            // Show snackbar for error handling
+            snackbar.classList.add('show');
+            // Hide snackbar after 3 seconds
+            setTimeout(() => {
+                snackbar.classList.remove('show');
+            }, 3000);
         });
-    
-        // Function to close the success popup
-        function closeSuccessPopup() {
-            successPopup.classList.remove('show');
-        }
-    </script>
-    </body>
-    </html>
-    
+    });
+
+    // Function to close the success popup
+    function closeSuccessPopup() {
+        successPopup.classList.remove('show');
+    }
+</script>
+</body>
+</html>
