@@ -73,22 +73,27 @@
                 class="mx-3 form-control"
                 id="Mail"
                 name="Mail"
-                list="addresses"
+                list="mails"
             />
-            <datalist id="addresses">
+            <datalist id="mails">
                 <!-- javascript will add options here -->                
             </datalist>
         </div>
         <div class="mb-1 d-flex">
-            <label class="mx-3" for="price">Massage:</label>
+            <label class="mx-3" for="message">Message:</label>
             <input
                 type="text"
                 class="mx-3 form-control"
-                id="Massage"
-                name="Massage"
+                id="Message"
+                name="Message"
+                list="Messages"
             />
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+            <datalist id="Messages">
+                <!-- javascript will add options here -->                
+            </datalist>
+        </div>        
+        <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+
     </form>
 
     <!-- Success Popup Modal -->
@@ -99,12 +104,19 @@
 
     <script>
         const url = "https://script.google.com/macros/s/AKfycbxr70scFKpoFALuiuSU5Dy01vIuId3n9UVEXNlvF-T3l17EwN1oBk3uPidAMnUD7HpTmw/exec"; // enter your public ('access' - 'anyone') deployment URL (NOT test deployment!)
-        document.getElementById('form').action = url;
+        const form = document.getElementById('form');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.action = url;
 
         // Function to handle form submission
-        function handleSubmit(event) {
+        form.addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission behavior
-            const formData = new FormData(event.target); // Get form data
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Submitting...';
+
+            const formData = new FormData(this); // Get form data
 
             // Send form data via fetch
             fetch(url, {
@@ -115,17 +127,23 @@
                 if (response.ok) {
                     // Show success popup
                     document.getElementById('success-popup').classList.add('show');
+                    // Reset the form
+                    form.reset();
+                    // Reset the submit button
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Submit';
                     // Optional: You can redirect to another page after submission
                     // window.location.href = "next-page.html";
                 } else {
                     throw new Error('Network response was not ok');
                 }
             })
-            .catch(error => console.error('Error submitting form:', error));
-        }
-
-        // Attach form submission handler
-        document.getElementById('form').addEventListener('submit', handleSubmit);
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit';
+            });
+        });
 
         // Function to close the success popup
         function closeSuccessPopup() {
