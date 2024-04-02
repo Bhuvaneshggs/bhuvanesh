@@ -1,13 +1,8 @@
 
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-</head>
-<body>
     <script>
-        const scriptURL = 'https://script.google.com/macros/library/d/1Qx9rQ5ykz1v_R6MgjUi-MgEzFanR6XBE5xs6k0VYbDIi8o8UoEJvLUXg/1'
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz59E7prNe6pl8-V4orjQf-k9MfABcIsZ4b3RQdB9r83PuUQXq6gSG8dkYWgaZjPR7KZw/exec'
         const form = document.forms['submit-to-google-sheet']
       
         form.addEventListener('submit', e => {
@@ -17,6 +12,8 @@
             .catch(error => console.error('Error!', error.message))
         })
       </script>
+</head>
+<body>
 <h3>Contact Form</h3>
     <form name="submit-to-google-sheet">
         <label>Name: </label><br>
