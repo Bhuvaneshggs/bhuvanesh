@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title link rel="icon" type="png" href="/image/logo.png"> SBCEC</title>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: linear-gradient(#141e30, #243b55);
+        }
+
+        .login-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            padding: 40px;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,.5);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0,0,0,.6);
+            border-radius: 10px;
+        }
+
+        .login-box h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .login-box .user-box {
+            position: relative;
+        }
+
+        .login-box .user-box input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 15px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
+
+        .login-box .user-box label {
+            position: absolute;
+            top:0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .login-box .user-box input:focus ~ label,
+        .login-box .user-box input:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #03e9f4;
+            font-size: 12px;
+        }
+
+        .login-box form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #03e9f4;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 4px
+        }
+
+        .login-box a:hover  {
+            background: #03e9f4;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #03e9f4,
+                        0 0 25px #03e9f4,
+                        0 0 50px #03e9f4,
+                        0 0 100px #03e9f4;
+        }
+
+        .login-box a span {
+            position: absolute;
+            display: block;
+        }
+
+        .login-box a span:nth-child(1) {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #03e9f4);
+            animation: btn-anim1 1s linear infinite;
+        }
+
+        @keyframes btn-anim1 {
+            0% {
+                left: -100%;
+            }
+            50%,100% {
+                left: 100%;
+            }
+        }
+
+        .login-box a span:nth-child(2) {
+            top: -100%;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #03e9f4);
+            animation: btn-anim2 1s linear infinite;
+            animation-delay: .25s
+        }
+
+        @keyframes btn-anim2 {
+            0% {
+                top: -100%;
+            }
+            50%,100% {
+                top: 100%;
+            }
+        }
+
+        .login-box a span:nth-child(3) {
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, #03e9f4);
+            animation: btn-anim3 1s linear infinite;
+            animation-delay: .5s
+        }
+
+        @keyframes btn-anim3 {
+            0% {
+                right: -100%;
+            }
+            50%,100% {
+                right: 100%;
+            }
+        }
+
+        .login-box a span:nth-child(4) {
+            bottom: -100%;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(360deg, transparent, #03e9f4);
+            animation: btn-anim4 1s linear infinite;
+            animation-delay: .75s
+        }
+
+        @keyframes btn-anim4 {
+            0% {
+                bottom: -100%;
+            }
+            50%,100% {
+                bottom: 100%;
+            }
+        }
+
+        .button4 {
+            border: 2px solid aqua;
+        }
+
+        .button4:hover {
+            color: aqua;
+            box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+        }
+    </style>
+</head>
+<body>
+<div class="login-box">
+    <center><img src="https://bhuvaneshgopal.com/image/logo.png" alt="LOGO" width="150" height="150"><br>
+    <h2>IT TECH TEAM LOGIN</h2>
+    <form id="form">
+        <div class="user-box">
+            <input type="text" name="" required=""
+              id="Name"
+              name="Name"
+              list="Names"
+          />>
+            <label>Name</label>
+            <datalist id="Names">
+              <!-- javascript will add options here -->
+          </datalist>
+          <div class="user-box">
+            <input type="number" name="" required=""
+              id="Phone"
+              name="Phone"
+              list="Phones"
+            />
+              <label>Phone</label>
+              <datalist id="Phones">
+                  <!-- javascript will add options here -->
+              </datalist>
+            </div>
+            <div class="user-box">
+              <input type="email" name="" required=""
+                id="Mail"
+                name="Mail"
+                list="Mail"
+            />>
+              <label>Mail ID</label>
+              <datalist id="Mails">
+                  <!-- javascript will add options here -->
+              </datalist>
+            </div>
+            <div class="user-box">
+              <input type="text" name="" required=""
+                id="Message"
+                name="Message"
+                list="Messages"
+            />>
+              <label>Message</label>
+              <datalist id="Messages">
+                  <!-- javascript will add options here -->
+              </datalist>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+        </form>
+    </div>
+    
+    <!-- Success Popup -->
+    <div id="success-popup" class="alert alert-success alert-dismissible fade" role="alert">
+        <strong>Success!</strong> Your form has been submitted successfully.
+        <button type="button" class="btn-close" onclick="closeSuccessPopup()"></button>
+    </div>
+    
+    <script>
+        const url = "https://script.google.com/macros/s/AKfycbxr70scFKpoFALuiuSU5Dy01vIuId3n9UVEXNlvF-T3l17EwN1oBk3uPidAMnUD7HpTmw/exec"; // enter your public ('access' - 'anyone') deployment URL (NOT test deployment!)
+        const form = document.getElementById('form');
+        const submitBtn = document.getElementById('submitBtn');
+        const successPopup = document.getElementById('success-popup');
+        const snackbar = document.getElementById('snackbar');
+    
+        form.action = url;
+    
+        // Function to handle form submission
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+    
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Submitting...';
+    
+            const formData = new FormData(this); // Get form data
+    
+            // Send form data via fetch
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success popup
+                    successPopup.classList.add('show');
+                    // Reset the form
+                    form.reset();
+                    // Reset the submit button
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Submit';
+                    // Optional: You can redirect to another page after submission
+                    // window.location.href = "next-page.html";
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit';
+                // Show snackbar for error handling
+                snackbar.classList.add('show');
+                // Hide snackbar after 3 seconds
+                setTimeout(() => {
+                    snackbar.classList.remove('show');
+                }, 3000);
+            });
+        });
+    
+        // Function to close the success popup
+        function closeSuccessPopup() {
+            successPopup.classList.remove('show');
+        }
+    </script>
+    </body>
+    </html>
+    
