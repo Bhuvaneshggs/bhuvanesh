@@ -1,32 +1,118 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz59E7prNe6pl8-V4orjQf-k9MfABcIsZ4b3RQdB9r83PuUQXq6gSG8dkYWgaZjPR7KZw/exec'
-        const form = document.forms['submit-to-google-sheet']
-      
-        form.addEventListener('submit', e => {
-          e.preventDefault()
-          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => console.log('Success!', response))
-            .catch(error => console.error('Error!', error.message))
-        })
-      </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Entry by codeSith</title>
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+        crossorigin="anonymous" 
+    />
+    <style>
+        form {
+            font-size: 40px !important;
+            width: min(800px, 90%);
+        }
+    </style>
 </head>
 <body>
-<h3>Contact Form</h3>
-    <form name="submit-to-google-sheet">
-        <label>Name: </label><br>
-        <input type="text" name="name" ><br><br>
-        <label>Email:</label><br>
-        <input type="email" name="email" ><br><br>
-        <label>Gender</label><br>
-        <input type="radio" name="gender" value="Male"><label>Male</label>
-        <input type="radio" name="gender" value="Female"><label>Female</label><br><br>
-        <label>Message</label><br>
-        <textarea name="message" cols="20">
-        </textarea><br><br>
-        <button type="submit">Send</button>
+    <form
+        id = "form"
+        class = "mx-auto my-5 shadow p-2"
+        method = "POST"
+    >
+    <!-- action= will be set by javascript -->
+        <div class="mb-1 d-flex">
+            <label class="mx-3" for="customer">Customer:</label>
+            <input
+                type="text"
+                class="mx-3 form-control"
+                id="customer"
+                name="Customer"
+                list="customers"
+            />
+            <datalist id="customers">
+                <!-- javascript will add options here -->
+            </datalist>
+        </div>
+        <div class="mb-1 d-flex">
+            <label class="mx-3" for="phone">Phone:</label>
+            <input
+                type="text"
+                class="mx-3 form-control"
+                id="phone"
+                name="Phone"
+                list="phones"
+            />
+            <datalist id="phones">
+                <!-- javascript will add options here -->
+            </datalist>
+        </div>
+        <div class="mb-1 d-flex">
+            <label class="mx-3" for="address">Address:</label>
+            <input
+                type="text"
+                class="mx-3 form-control"
+                id="address"
+                name="Address"
+                list="addresses"
+            />
+            <datalist id="addresses">
+                <!-- javascript will add options here -->                
+            </datalist>
+        </div>
+        <div class="mb-1 d-flex">
+            <label class="mx-3" for="price">Price:</label>
+            <input
+                type="text"
+                class="mx-3 form-control"
+                id="price"
+                name="Price"
+            />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <script>
+        const url = "https://script.google.com/macros/s/AKfycbxr70scFKpoFALuiuSU5Dy01vIuId3n9UVEXNlvF-T3l17EwN1oBk3uPidAMnUD7HpTmw/exec" // enter your public ('access' - 'anyone') deployment URL (NOT test deployment!)
+        document.getElementById('form').action = url;
+
+        // fetching the data from each column in the sheet
+        // then populating the respective datalist
+        fetch(`${url}?header=Customer`)
+            .then((response) => response.json())
+            .then(({ data }) => {
+                console.log(data);
+                populateDatalists("customers", data)
+            })
+            .catch((error) => console.error('!!!!!!!!', error));
+
+        fetch(`${url}?header=Phone`)
+            .then((response) => response.json())
+            .then(({ data }) => {
+                console.log(data);
+                populateDatalists("phones", data)
+            })
+            .catch((error) => console.error('!!!!!!!!', error));
+        
+        fetch(`${url}?header=Address`)
+            .then((response) => response.json())
+            .then(({ data }) => {
+                console.log(data);
+                populateDatalists("addresses", data)
+            })
+            .catch((error) => console.error('!!!!!!!!', error));
+
+        // function to add options to datalists
+        const populateDatalists = (id, arr) => {
+            let result = '';
+            for (const item of arr) {
+                result += `<option value="${item}">`;
+            }
+            document.getElementById(id).innerHTML = result;
+        }
+    </script>
 </body>
 </html>
