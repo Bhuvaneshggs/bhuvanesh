@@ -224,8 +224,9 @@
             <!-- Options will be added dynamically -->
         </datalist>
     </div>
-    <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+        <button type="button" class="btn btn-primary" id="razorpayBtn">Pay with Razorpay</button>
     </form>
+    </center>
 </div>
 
     
@@ -237,61 +238,73 @@
 <!-- Snackbar for error handling -->
 <div id="snackbar">Error submitting form. Please try again later.</div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     const url = "https://script.google.com/macros/s/AKfycbxr70scFKpoFALuiuSU5Dy01vIuId3n9UVEXNlvF-T3l17EwN1oBk3uPidAMnUD7HpTmw/exec"; // enter your public ('access' - 'anyone') deployment URL (NOT test deployment!)
     const form = document.getElementById('form');
-    const submitBtn = document.getElementById('submitBtn');
-    const successPopup = document.getElementById('success-popup');
-    const snackbar = document.getElementById('snackbar');
+    const razorpayBtn = document.getElementById('razorpayBtn');
 
-    form.action = url;
+    // Function to handle Razorpay payment
+    razorpayBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default button click behavior
 
-    // Function to handle form submission
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission behavior
+        const formData = new FormData(form); // Get form data
+        const options = {
+                key: 'rzp_test_Gjmole9xC47rJX', // Your Razorpay key_id
+                amount: 50000, // Example amount (in paise or the smallest currency unit)
+                currency: 'INR',
+                name: 'Your Company Name',
+                description: 'Payment for your service',
+                handler: function(response) {
+                    // Handle successful payment
+                    console.log('Payment successful:', response);
+                    submitForm();
+                },
+                prefill: {
+                    name: formData.get('Name'),
+                    email: formData.get('Mail'),
+                    contact: formData.get('Phone')
+                }
+            };
 
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Submitting...';
-
-        const formData = new FormData(this); // Get form data
-
-        // Send form data via fetch
-        fetch(url, {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                // Show success popup
-                successPopup.classList.add('show');
-                // Reset the form
-                form.reset();
-                // Reset the submit button
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Submit';
-                // Optional: You can redirect to another page after submission
-                // window.location.href = "next-page.html";
-            } else {
-                throw new Error('Network response was not ok');
-            }
-        })
-        .catch(error => {
-            console.error('Error submitting form:', error);
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = 'Submit';
-            // Show snackbar for error handling
-            snackbar.classList.add('show');
-            // Hide snackbar after 3 seconds
-            setTimeout(() => {
-                snackbar.classList.remove('show');
-            }, 3000);
+            const rzp = new Razorpay(options);
+            rzp.open();
         });
-    });
 
-    // Function to close the success popup
-    function closeSuccessPopup() {
-        successPopup.classList.remove('show');
-    }
+        // Function to handle form submission
+        function submitForm() {
+            const formData = new FormData(form); // Get form data
+
+            // Send form data via fetch
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success popup
+                    document.getElementById('success-popup').classList.add('show');
+                    // Reset the form
+                    form.reset();
+                    // Reset the submit button
+                    razorpayBtn.disabled = false;
+                    razorpayBtn.innerHTML = 'Pay with Razorpay';
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                razorpayBtn.disabled = false;
+                razorpayBtn.innerHTML = 'Pay with Razorpay';
+            });
+        }
+                // Function to close the success popup
+                function closeSuccessPopup() {
+            document.getElementById('success-popup').classList.remove('show');
+        }
+    </script>
 </script>
 </body>
 </html>
