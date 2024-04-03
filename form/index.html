@@ -65,6 +65,9 @@
             pointer-events: none;
             transition: .5s;
         }
+        .txtt{
+            color: #fff;
+        }
 
         .login-box .user-box input:focus ~ label,
         .login-box .user-box input:valid ~ label {
@@ -139,7 +142,7 @@
                 top: 100%;
             }
         }
-
+        
         .login-box a span:nth-child(3) {
             bottom: 0;
             right: -100%;
@@ -189,6 +192,29 @@
                 0 0 50px #03e9f4,
                 0 0 100px #03e9f4;
         }
+        .m-dropdown{
+  margin:15px auto;
+  width:300px;
+  
+  select {
+    @include font-size(1.4, 2);
+    padding: 8px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background:#1b1b1b;
+    color: #fff;
+    font-weight: 900;
+    appearance: none; /* Remove default arrow */
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    
+    &:hover, &:focus {
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      outline: none;
+    }
+  }
+}
     </style>
 </head>
 <body>
@@ -224,11 +250,33 @@
                 <!-- Options will be added dynamically -->
             </datalist>
         </div>
+        <div class="txtt">
+            <h3>Event 1</h3>
+        </div>
+            <div class="m-dropdown">
+                <select class="e-select" name="Dropdown" id="Dropdown" name="Dropdown" list="Dropdowns" required="">
+                  <option value="" disabled selected style="display:none;">Select an item</option>
+                      <optgroup label="Technical ">
+                        <option>a</option>
+                        <option>b</option>
+                        <option>c</option>
+                        <option>d</option>
+                      </optgroup>
+                      <optgroup label="Non Technical">
+                        <option>aa</option>
+                        <option>bb</option>
+                        <option>cc</option>
+                        <option>dd</option>
+                      </optgroup>
+                      <datalist id="Dropdowns">
+                        <!-- Options will be added dynamically -->
+                    </datalist>
+                </select>          
+        </div>
         <button type="button" class="btn btn-primary" id="razorpayBtn">Pay</button>
     </form>
     </center>
 </div>
-
     
     <!-- Success Popup -->
 <div id="success-popup" class="alert alert-success alert-dismissible fade" role="alert">
@@ -237,7 +285,20 @@
 </div>
 <!-- Snackbar for error handling -->
 <div id="snackbar">Error submitting form. Please try again later.</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  $(".e-select").on("change", function() {
+    var selectedValue = $(this).val();
+    console.log("Selected value: " + selectedValue);
+    // Add your logic here based on the selected value
+  });
+});
+function submitForm(paymentId) {
+    const formData = new FormData(form); // Get form data
+    formData.append('PaymentID', paymentId); // Append the payment ID to form data
 
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
