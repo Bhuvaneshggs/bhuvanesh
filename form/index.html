@@ -252,10 +252,11 @@
         const formData = new FormData(form); // Get form data
         const options = {
                 key: 'rzp_test_Gjmole9xC47rJX', // Your Razorpay key_id
-                amount: 50000, // Example amount (in paise or the smallest currency unit)
+                amount: 20000, // Example amount (in paise or the smallest currency unit)
                 currency: 'INR',
-                name: 'Your Company Name',
-                description: 'Payment for your service',
+                name: 'SRI BALAJI CHOCKALINGAM ENGINEERING COLLEGE',
+                description: 'Payment for event registration',
+                image: 'logo.png',
                 handler: function(response) {
                     // Handle successful payment
                     console.log('Payment successful:', response);
