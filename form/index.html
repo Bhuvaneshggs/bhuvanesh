@@ -305,7 +305,7 @@
                     form.reset();
                     // Reset the submit button
                     razorpayBtn.disabled = true;
-                    razorpayBtn.innerHTML = 'Pay with Razorpay';
+                    razorpayBtn.innerHTML = 'Pay';
                 } else {
                     throw new Error('Network response was not ok');
                 }
@@ -313,7 +313,7 @@
             .catch(error => {
                 console.error('Error submitting form:', error);
                 razorpayBtn.disabled = false;
-                razorpayBtn.innerHTML = 'Pay with Razorpay';
+                razorpayBtn.innerHTML = 'Pay';
             });
         }
 
