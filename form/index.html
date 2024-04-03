@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title> SBCEC</title>
+    <link rel="icon" type="png" href="logo.png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -191,33 +193,36 @@
 </head>
 <body>
 <div class="login-box">
-    <center><img src="https://www.sbcecarni.com/images/sbcec_final.png" alt="LOGO" width="300" height="80"><br>
+    <center><img src="logo.png" alt="LOGO" width="150" height="150"><br>
     <h2>IT TECH TEAM LOGIN</h2>
     <form id="form">
         <div class="user-box">
-            <input type="text" id="Name" name="Name" list="Names"/>
+            <input type="text" id="Name" name="Name" list="Names" required=""/>
         <label for="Name">Name</label>
         <datalist id="Names">
             <!-- Options will be added dynamically -->
         </datalist>
     </div>
     <div class="user-box">
-        <input type="number" id="Phone" name="Phone" list="Phones" />
+        <input type="number" id="Phone" name="Phone" list="Phones" required=""/>
         <label for="Phone">Phone</label>
         <datalist id="Phones">
             <!-- Options will be added dynamically -->
         </datalist>
     </div>
     <div class="user-box">
-        <input type="email" id="Mail" name="Mail" list="Mails" />
+        <input type="email" id="Mail" name="Mail" list="Mails" required="" />
         <label for="Mail">Mail ID</label>
         <datalist id="Mails">
             <!-- Options will be added dynamically -->
         </datalist>
     </div>
     <div class="user-box">
-        <textarea id="Message" name="Message" maxlength="200"></textarea>
+        <input type="Message" id="Message" name="Message" list="Messages" required=""/>
         <label for="Message">Message</label>
+        <datalist id="Messages">
+            <!-- Options will be added dynamically -->
+        </datalist>
     </div>
     <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
     </form>
