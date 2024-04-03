@@ -198,32 +198,32 @@
     <form id="form">
         <div class="user-box">
             <input type="text" id="Name" name="Name" list="Names" required=""/>
-        <label for="Name">Name</label>
-        <datalist id="Names">
-            <!-- Options will be added dynamically -->
-        </datalist>
-    </div>
-    <div class="user-box">
-        <input type="number" id="Phone" name="Phone" list="Phones" required=""/>
-        <label for="Phone">Phone</label>
-        <datalist id="Phones">
-            <!-- Options will be added dynamically -->
-        </datalist>
-    </div>
-    <div class="user-box">
-        <input type="email" id="Mail" name="Mail" list="Mails" required="" />
-        <label for="Mail">Mail ID</label>
-        <datalist id="Mails">
-            <!-- Options will be added dynamically -->
-        </datalist>
-    </div>
-    <div class="user-box">
-        <input type="Message" id="Message" name="Message" list="Messages" required=""/>
-        <label for="Message">Message</label>
-        <datalist id="Messages">
-            <!-- Options will be added dynamically -->
-        </datalist>
-    </div>
+            <label for="Name">Name</label>
+            <datalist id="Names">
+                <!-- Options will be added dynamically -->
+            </datalist>
+        </div>
+        <div class="user-box">
+            <input type="number" id="Phone" name="Phone" list="Phones" required=""/>
+            <label for="Phone">Phone</label>
+            <datalist id="Phones">
+                <!-- Options will be added dynamically -->
+            </datalist>
+        </div>
+        <div class="user-box">
+            <input type="email" id="Mail" name="Mail" list="Mails" required="" />
+            <label for="Mail">Mail ID</label>
+            <datalist id="Mails">
+                <!-- Options will be added dynamically -->
+            </datalist>
+        </div>
+        <div class="user-box">
+            <input type="Message" id="Message" name="Message" list="Messages" required=""/>
+            <label for="Message">Message</label>
+            <datalist id="Messages">
+                <!-- Options will be added dynamically -->
+            </datalist>
+        </div>
         <button type="button" class="btn btn-primary" id="razorpayBtn">Pay with Razorpay</button>
     </form>
     </center>
@@ -244,6 +244,21 @@
     const url = "https://script.google.com/macros/s/AKfycbxr70scFKpoFALuiuSU5Dy01vIuId3n9UVEXNlvF-T3l17EwN1oBk3uPidAMnUD7HpTmw/exec"; // enter your public ('access' - 'anyone') deployment URL (NOT test deployment!)
     const form = document.getElementById('form');
     const razorpayBtn = document.getElementById('razorpayBtn');
+
+    // Initially disable the button
+    razorpayBtn.disabled = true;
+
+    // Function to enable/disable the button based on form validity
+    function toggleButton() {
+        if (form.checkValidity()) {
+            razorpayBtn.disabled = false;
+        } else {
+            razorpayBtn.disabled = true;
+        }
+    }
+
+    // Event listener to check form validity on input change
+    form.addEventListener('input', toggleButton);
 
     // Function to handle Razorpay payment
     razorpayBtn.addEventListener('click', function(event) {
@@ -289,7 +304,7 @@
                     // Reset the form
                     form.reset();
                     // Reset the submit button
-                    razorpayBtn.disabled = false;
+                    razorpayBtn.disabled = true;
                     razorpayBtn.innerHTML = 'Pay with Razorpay';
                 } else {
                     throw new Error('Network response was not ok');
@@ -301,11 +316,11 @@
                 razorpayBtn.innerHTML = 'Pay with Razorpay';
             });
         }
-                // Function to close the success popup
-                function closeSuccessPopup() {
+
+        // Function to close the success popup
+        function closeSuccessPopup() {
             document.getElementById('success-popup').classList.remove('show');
         }
-    </script>
 </script>
 </body>
 </html>
