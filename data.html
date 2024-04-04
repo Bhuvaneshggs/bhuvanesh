@@ -1,447 +1,123 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title> SBCEC</title>
-    <link rel="icon" type="png" href="logo.png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Data Entry by Bhuvanesh</title>
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+        crossorigin="anonymous" 
+    />
     <style>
-        html {
-            height: 100%;
+        form {
+            font-size: 25px !important;
+            width: min(800px, 90%);
         }
-
-        body {
-            margin: 0;
-            height: 100%;
-            padding: auto;
-            font-family: sans-serif;
-            background: linear-gradient(#141e30, #243b55);
-        }
-
-        .login-box {
-            position: absolute;
+        .popup {
+            display: none;
+            position: fixed;
             top: 50%;
             left: 50%;
-            width: 400px;
-            padding: 40px;
             transform: translate(-50%, -50%);
-            background: rgba(0,0,0,.5);
-            box-sizing: border-box;
-            box-shadow: 0 15px 25px rgba(0,0,0,.6);
-            border-radius: 10px;
-        }
-
-        .login-box h2 {
-            margin: 0 0 30px;
-            padding: 0;
-            color: #fff;
-            text-align: center;
-        }
-        .login-box {
-    /* Other styles */
-    height: 100vh; /* Set a fixed height */
-    overflow-y: auto; /* Enable vertical scrolling */
-}
-.login-box::-webkit-scrollbar {
-    display: none; /* Hide the scrollbar */
-}
-        .login-box .user-box {
-            position: relative;
-        }
-
-        .login-box .user-box input {
-            width: 100%;
-            height: 100%;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            margin-bottom: 15px;
-            border: none;
-            border-bottom: 1px solid #fff;
-            outline: none;
-            background: transparent;
-        }
-
-        .login-box .user-box label {
-            position: absolute;
-            top:0;
-            left: 0;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            pointer-events: none;
-            transition: .5s;
-        }
-        .txtt{
-            color: #fff;
-            left: 0;
-            width: 100%;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            border: none;
-            outline: none;
-            background: transparent;
-            margin: 0 0 15px;
-            padding: 0;
-            color: #fff;
-            text-align: left;
-            font-size: 16px;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .login-box .user-box input:focus ~ label,
-        .login-box .user-box input:valid ~ label {
-            top: -20px;
-            left: 0;
-            color: #03e9f4;
-            font-size: 12px;
-        }
-
-        .login-box form a {
-            position: relative;
-            display: inline-block;
-            padding: 10px 20px;
-            color: #03e9f4;
-            font-size: 16px;
-            text-decoration: none;
-            text-transform: uppercase;
-            overflow: hidden;
-            transition: .5s;
-            margin-top: 40px;
-            letter-spacing: 4px
-        }
-        
-        .line{
-            border-bottom: 1px solid #fff;
-            margin-bottom: 15px;
-        }
-
-        .login-box a:hover  {
-            background: #03e9f4;
-            color: #fff;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 0 5px #03e9f4,
-                        0 0 25px #03e9f4,
-                        0 0 50px #03e9f4,
-                        0 0 100px #03e9f4;
+            z-index: 9999;
         }
-
-        .login-box a span {
-            position: absolute;
+        .popup.show {
             display: block;
         }
-
-        .login-box a span:nth-child(1) {
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #03e9f4);
-            animation: btn-anim1 1s linear infinite;
-        }
-
-        @keyframes btn-anim1 {
-            0% {
-                left: -100%;
-            }
-            50%,100% {
-                left: 100%;
-            }
-        }
-
-        .login-box a span:nth-child(2) {
-            top: -100%;
-            right: 0;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(180deg, transparent, #03e9f4);
-            animation: btn-anim2 1s linear infinite;
-            animation-delay: .25s
-        }
-
-        @keyframes btn-anim2 {
-            0% {
-                top: -100%;
-            }
-            50%,100% {
-                top: 100%;
-            }
-        }
-        .stu{
-            left: ;
-            font-size: 14px;
-            font-weight: 700;
-            color: #ffffff;
-        }
-        .login-box a span:nth-child(3) {
-            bottom: 0;
-            right: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(270deg, transparent, #03e9f4);
-            animation: btn-anim3 1s linear infinite;
-            animation-delay: .5s
-        }
-
-        @keyframes btn-anim3 {
-            0% {
-                right: -100%;
-            }
-            50%,100% {
-                right: 100%;
-            }
-        }
-
-        .login-box a span:nth-child(4) {
-            bottom: -100%;
-            left: 0;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(360deg, transparent, #03e9f4);
-            animation: btn-anim4 1s linear infinite;
-            animation-delay: .75s
-        }
-
-        @keyframes btn-anim4 {
-            0% {
-                bottom: -100%;
-            }
-            50%,100% {
-                bottom: 100%;
-            }
-        }
-
-        .button4 {
-            border: 2px solid aqua;
-        }
-
-        .button4:hover {
-            color: aqua;
-            box-shadow: 0 0 5px #03e9f4,
-                0 0 25px #03e9f4,
-                0 0 50px #03e9f4,
-                0 0 100px #03e9f4;
-        }
-        .m-dropdown{
-  margin: 15px auto ;
-  width:100%;
-  
-  select {
-    @include font-size(2, 2);
-    padding: 8px;
-    border-radius: 20px;
-    border: 2px solid #ffffff;
-    background:#141e30;
-    color: #fff;
-    font-weight: 900;
-    appearance: none; /* Remove default arrow */
-    width: 100%;
-    box-sizing: border-box;
-    cursor: pointer;
-    
-    &:hover, &:focus {
-      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-      outline: none;
-    }
-  }
-}
     </style>
 </head>
 <body>
-<div class="login-box">
-    <center><img src="logo.png" alt="LOGO" width="150" height="150"><br>
-    <h2>IT TECH TEAM</h2>
-    <form id="form">
-        <div class="user-box">
-            <input type="text" id="Name" name="Name" list="Names" required=""/>
-            <label for="Name">Name</label>
-            <datalist id="Names">
-                <!-- Options will be added dynamically -->
+    <form
+        id="form"
+        class="mx-auto my-5 shadow p-2"
+        method="POST"
+    >
+        <!-- action= will be set by javascript -->
+        <div class="mb-1 d-flex">
+            <label class="mx-3" for="customer">Name:</label>
+            <input
+                type="text"
+                class="mx-3 form-control"
+                id="Name"
+                name="Name"
+                list="customers"
+            />
+            <datalist id="customers">
+                <!-- javascript will add options here -->
             </datalist>
         </div>
-        <div class="user-box">
-            <style>
-                /* Hide spin buttons for number input */
-                input[type=number]::-webkit-inner-spin-button,
-                input[type=number]::-webkit-outer-spin-button {
-                    -webkit-appearance: none;
-                    margin: 0; /* Removes the margin */
-                }
-            
-                input[type=number] {
-                    -moz-appearance: textfield; /* Firefox */
-                }
-            </style>
-            <input type="number" id="Phone" name="Phone" list="Phones" required=""/>
-            <label for="Phone">Phone</label>
-            <datalist id="Phones">
-                <!-- Options will be added dynamically -->
+        <div class="mb-1 d-flex">
+            <label class="mx-3" for="phone">Phone:</label>
+            <input
+                type="text"
+                class="mx-3 form-control"
+                id="phone"
+                name="Phone"
+                list="phones"
+            />
+            <datalist id="phones">
+                <!-- javascript will add options here -->
             </datalist>
         </div>
-        <div class="user-box">
-            <input type="email" id="Mail ID" name="Mail ID" list="Mails" required="" />
-            <label for="Mail ID">Mail ID</label>
-            <datalist id="Mails">
-                <!-- Options will be added dynamically -->
+        <div class="mb-1 d-flex">
+            <label class="mx-3" for="address">Mail ID:</label>
+            <input
+                type="text"
+                class="mx-3 form-control"
+                id="Mail"
+                name="Mail"
+                list="mails"
+            />
+            <datalist id="mails">
+                <!-- javascript will add options here -->                
             </datalist>
         </div>
-        <div class="user-box">
-            <input type="text" id="College Name" name="College Name" list="Colleges" required=""/>
-            <label for="College Name">College Name</label>
-            <datalist id="Colleges">
-                <!-- Options will be added dynamically -->
+        <div class="mb-1 d-flex">
+            <label class="mx-3" for="message">Message:</label>
+            <input
+                type="text"
+                class="mx-3 form-control"
+                id="Message"
+                name="Message"
+                list="Messages"
+            />
+            <datalist id="Messages">
+                <!-- javascript will add options here -->                
             </datalist>
-        </div>
-        <div class="user-box">
-            <input type="text" id="Department" name="Department" list="Departments" required=""/>
-            <label for="Department">Department</label>
-            <datalist id="Departments">
-                <!-- Options will be added dynamically -->
-            </datalist>
-        </div>
-        <div class="line">
-        <div class="m-dropdown">
-            <div class="txtt">
-                <h6>current study in year</h6>
-            </div>
-            <select class="e-select" name="Year" id="Year" list="Years" required="">
-              <option value="" disabled selected style="display:none;">Select an Year</option>
-                  <optgroup label="Year ">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </optgroup>
-                  <datalist id="Years">
-                    <!-- Options will be added dynamically -->
-                </datalist>
-            </select>
-        </div>
-    </div>
-            <div class="stu">
-            <p>Student Can Purchase Maximum 2 Event Only</p>
-            </div>
-            <div class="txtt">
-            <h6>Event 1</h6>
-            <div class="m-dropdown">
-                <select class="e-select" name="Event 1" id="Event 1" list="Event1" required="">
-                  <option value="" disabled selected style="display:none;">Select an Event</option>
-                      <optgroup label="Technical ">
-                        <option>a</option>
-                        <option>b</option>
-                        <option>c</option>
-                        <option>d</option>
-                      </optgroup>
-                      <optgroup label="Non Technical">
-                        <option>aa</option>
-                        <option>bb</option>
-                        <option>cc</option>
-                        <option>dd</option>
-                      </optgroup>
-                      <datalist id="Event1">
-                        <!-- Options will be added dynamically -->
-                    </datalist>
-                </select>
-            </div>
-                <h6>Event 2</h6>
-                <div class="m-dropdown">
-                <select class="e-select" name="Event 2" id="Event 2" list="Event2" required="">
-                    <option value="" disabled selected style="display:none;">Select an Event</option>
-                        <optgroup label="Technical ">
-                          <option>a</option>
-                          <option>b</option>
-                          <option>c</option>
-                          <option>d</option>
-                        </optgroup>
-                        <optgroup label="Non Technical">
-                          <option>aa</option>
-                          <option>bb</option>
-                          <option>cc</option>
-                          <option>dd</option>
-                        </optgroup>
-                        <optgroup label="Only one Event">
-                            <option>Nil</option>
-                          </optgroup>
-                        <datalist id="Event2">
-                          <!-- Options will be added dynamically -->
-                      </datalist>
-                  </select>  
-                </div>        
-        </div>
-    
-        <button type="button" class="btn btn-primary" id="razorpayBtn">Pay</button>
+        </div>        
+        <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+
     </form>
-    </center>
-</div>
-    
-    <!-- Success Popup -->
-<div id="success-popup" class="alert alert-success alert-dismissible fade" role="alert">
-    <strong>Success!</strong> Your form has been submitted successfully.
-    <button type="button" class="btn-close" onclick="closeSuccessPopup()"></button>
-</div>
-<!-- Snackbar for error handling -->
-<div id="snackbar"></div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-    const url = "https://script.google.com/macros/s/AKfycbxr70scFKpoFALuiuSU5Dy01vIuId3n9UVEXNlvF-T3l17EwN1oBk3uPidAMnUD7HpTmw/exec"; // enter your public ('access' - 'anyone') deployment URL (NOT test deployment!)
-    const form = document.getElementById('form');
-    const razorpayBtn = document.getElementById('razorpayBtn');
 
-    // Initially disable the button
-    razorpayBtn.disabled = true;
+    <!-- Success Popup Modal -->
+    <div id="success-popup" class="popup">
+        <p>Form submitted successfully!</p>
+        <button onclick="closeSuccessPopup()">Close</button>
+    </div>
 
-    // Function to enable/disable the button based on form validity
-    function toggleButton() {
-        if (form.checkValidity()) {
-            razorpayBtn.disabled = false;
-        } else {
-            razorpayBtn.disabled = true;
-        }
-    }
+    <script>
+        const url = "https://script.google.com/macros/s/AKfycbxr70scFKpoFALuiuSU5Dy01vIuId3n9UVEXNlvF-T3l17EwN1oBk3uPidAMnUD7HpTmw/exec"; // enter your public ('access' - 'anyone') deployment URL (NOT test deployment!)
+        const form = document.getElementById('form');
+        const submitBtn = document.getElementById('submitBtn');
 
-    // Event listener to check form validity on input change
-    form.addEventListener('input', toggleButton);
-
-    // Function to handle Razorpay payment
-    razorpayBtn.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default button click behavior
-
-        // Change the text of the button to "Processing"
-        razorpayBtn.innerHTML = 'Processing...';
-
-        const formData = new FormData(form); // Get form data
-        const options = {
-                key: 'rzp_test_Gjmole9xC47rJX', // Your Razorpay key_id
-                amount: 20000, // Example amount (in paise or the smallest currency unit)
-                currency: 'INR',
-                name: 'SRI BALAJI CHOCKALINGAM ENGINEERING COLLEGE',
-                description: 'Payment for event registration',
-                image: 'logo.png',
-                handler: function(response) {
-                    // Handle successful payment
-                    console.log('Payment successful:', response);
-                    submitForm();
-                },
-                prefill: {
-                    name: formData.get('Name'),
-                    email: formData.get('Mail'),
-                    contact: formData.get('Phone')
-                }
-            };
-
-            const rzp = new Razorpay(options);
-            rzp.open();
-        });
+        form.action = url;
 
         // Function to handle form submission
-        function submitForm() {
-            const formData = new FormData(form); // Get form data
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Submitting...';
+
+            const formData = new FormData(this); // Get form data
 
             // Send form data via fetch
             fetch(url, {
@@ -455,23 +131,25 @@
                     // Reset the form
                     form.reset();
                     // Reset the submit button
-                    razorpayBtn.disabled = true;
-                    razorpayBtn.innerHTML = 'Pay';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Submit';
+                    // Optional: You can redirect to another page after submission
+                    // window.location.href = "next-page.html";
                 } else {
                     throw new Error('Network response was not ok');
                 }
             })
             .catch(error => {
                 console.error('Error submitting form:', error);
-                razorpayBtn.disabled = false;
-                razorpayBtn.innerHTML = 'Pay';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit';
             });
-        }
+        });
 
         // Function to close the success popup
         function closeSuccessPopup() {
             document.getElementById('success-popup').classList.remove('show');
         }
-</script>
+    </script>
 </body>
 </html>
