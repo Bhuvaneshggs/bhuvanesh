@@ -264,6 +264,18 @@
             </datalist>
         </div>
         <div class="user-box">
+            <style>
+                /* Hide spin buttons for number input */
+                input[type=number]::-webkit-inner-spin-button,
+                input[type=number]::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0; /* Removes the margin */
+                }
+            
+                input[type=number] {
+                    -moz-appearance: textfield; /* Firefox */
+                }
+            </style>
             <input type="number" id="Phone" name="Phone" list="Phones" required=""/>
             <label for="Phone">Phone</label>
             <datalist id="Phones">
@@ -271,30 +283,23 @@
             </datalist>
         </div>
         <div class="user-box">
-            <input type="email" id="Mail" name="Mail" list="Mails" required="" />
-            <label for="Mail">Mail ID</label>
+            <input type="email" id="Mail ID" name="Mail ID" list="Mails" required="" />
+            <label for="Mail ID">Mail ID</label>
             <datalist id="Mails">
                 <!-- Options will be added dynamically -->
             </datalist>
         </div>
         <div class="user-box">
-            <input type="Message" id="Message" name="Message" list="Messages" required=""/>
-            <label for="Message">College Name</label>
-            <datalist id="Messages">
+            <input type="text" id="College Name" name="College Name" list="Colleges" required=""/>
+            <label for="College Name">College Name</label>
+            <datalist id="Colleges">
                 <!-- Options will be added dynamically -->
             </datalist>
         </div>
         <div class="user-box">
-            <input type="Message" id="Message" name="Message" list="Messages" required=""/>
-            <label for="Message">Department</label>
-            <datalist id="Messages">
-                <!-- Options will be added dynamically -->
-            </datalist>
-        </div>
-        <div class="user-box">
-            <input type="Message" id="Message" name="Message" list="Messages" required=""/>
-            <label for="Message">Message</label>
-            <datalist id="Messages">
+            <input type="text" id="Department" name="Department" list="Departments" required=""/>
+            <label for="Department">Department</label>
+            <datalist id="Departments">
                 <!-- Options will be added dynamically -->
             </datalist>
         </div>
@@ -303,7 +308,7 @@
             <div class="txtt">
                 <h6>current study in year</h6>
             </div>
-            <select class="e-select" name="Dropdown" id="Dropdown" name="Dropdown" list="Dropdowns" required="">
+            <select class="e-select" name="Year" id="Year" list="Years" required="">
               <option value="" disabled selected style="display:none;">Select an Year</option>
                   <optgroup label="Year ">
                     <option>1</option>
@@ -312,7 +317,7 @@
                     <option>4</option>
                     <option>5</option>
                   </optgroup>
-                  <datalist id="Dropdowns">
+                  <datalist id="Years">
                     <!-- Options will be added dynamically -->
                 </datalist>
             </select>
@@ -324,7 +329,7 @@
             <div class="txtt">
             <h6>Event 1</h6>
             <div class="m-dropdown">
-                <select class="e-select" name="Dropdown" id="Dropdown" name="Dropdown" list="Dropdowns" required="">
+                <select class="e-select" name="Event 1" id="Event 1" list="Event1" required="">
                   <option value="" disabled selected style="display:none;">Select an Event</option>
                       <optgroup label="Technical ">
                         <option>a</option>
@@ -338,14 +343,14 @@
                         <option>cc</option>
                         <option>dd</option>
                       </optgroup>
-                      <datalist id="Dropdowns">
+                      <datalist id="Event1">
                         <!-- Options will be added dynamically -->
                     </datalist>
                 </select>
             </div>
                 <h6>Event 2</h6>
                 <div class="m-dropdown">
-                <select class="e-select" name="Dropdown" id="Dropdown" name="Dropdown" list="Dropdowns" required="">
+                <select class="e-select" name="Event 2" id="Event 2" list="Event2" required="">
                     <option value="" disabled selected style="display:none;">Select an Event</option>
                         <optgroup label="Technical ">
                           <option>a</option>
@@ -362,7 +367,7 @@
                         <optgroup label="Only one Event">
                             <option>Nil</option>
                           </optgroup>
-                        <datalist id="Dropdowns">
+                        <datalist id="Event2">
                           <!-- Options will be added dynamically -->
                       </datalist>
                   </select>  
