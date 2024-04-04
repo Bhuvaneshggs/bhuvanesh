@@ -387,20 +387,6 @@
 <!-- Snackbar for error handling -->
 <div id="snackbar"></div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script
-$(document).ready(function() {
-  $(".e-select").on("change", function() {
-    var selectedValue = $(this).val();
-    console.log("Selected value: " + selectedValue);
-    // Add your logic here based on the selected value
-  });
-});
-function submitForm(paymentId) {
-    const formData = new FormData(form); // Get form data
-    formData.append('PaymentID', paymentId); // Append the payment ID to form data
-
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     const url = "https://script.google.com/macros/s/AKfycbxr70scFKpoFALuiuSU5Dy01vIuId3n9UVEXNlvF-T3l17EwN1oBk3uPidAMnUD7HpTmw/exec"; // enter your public ('access' - 'anyone') deployment URL (NOT test deployment!)
@@ -425,6 +411,9 @@ function submitForm(paymentId) {
     // Function to handle Razorpay payment
     razorpayBtn.addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default button click behavior
+
+        // Change the text of the button to "Processing"
+        razorpayBtn.innerHTML = 'Processing...';
 
         const formData = new FormData(form); // Get form data
         const options = {
