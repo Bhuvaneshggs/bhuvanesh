@@ -520,6 +520,26 @@ form.addEventListener('input', toggleOfflinePaymentButton);
             }
             document.getElementById('reportID').value = result;
         }
+        razorpayBtn.addEventListener('click', function(event) {
+    // Prevent default button click behavior
+    event.preventDefault();
+
+    // Disable the offline payment button
+    offlinePaymentBtn.disabled = true;
+
+    // Your existing Razorpay payment logic goes here...
+});
+
+// Event listener for offline payment button
+offlinePaymentBtn.addEventListener('click', function(event) {
+    // Prevent default button click behavior
+    event.preventDefault();
+
+    // Disable the Razorpay button
+    razorpayBtn.disabled = true;
+
+    // Your existing offline payment logic goes here...
+});
         
         // Call the function to generate and set random report ID when the page loads
         generateReportID();
