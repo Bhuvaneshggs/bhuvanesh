@@ -67,6 +67,23 @@
         }
         .txtt{
             color: #fff;
+            left: 0;
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 15px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+            margin: 0 0 15px;
+            padding: 0;
+            color: #fff;
+            text-align: left;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
         }
 
         .login-box .user-box input:focus ~ label,
@@ -142,7 +159,12 @@
                 top: 100%;
             }
         }
-        
+        .stu{
+            left: ;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
         .login-box a span:nth-child(3) {
             bottom: 0;
             right: -100%;
@@ -193,15 +215,15 @@
                 0 0 100px #03e9f4;
         }
         .m-dropdown{
-  margin:15px auto;
-  width:300px;
+  margin:13px auto;
+  width:100%;
   
   select {
-    @include font-size(1.4, 2);
+    @include font-size(2, 2);
     padding: 8px;
     border-radius: 20px;
-    border: 2px solid transparent;
-    background:#1b1b1b;
+    border: 2px solid #ffffff;
+    background:#141e30;
     color: #fff;
     font-weight: 900;
     appearance: none; /* Remove default arrow */
@@ -230,7 +252,7 @@
             </datalist>
         </div>
         <div class="user-box">
-            <input type="number" id="Phone" name="Phone" list="Phones" required="" ng-pattern="/^[0-9]{10}$/"/>
+            <input type="number" id="Phone" name="Phone" list="Phones" required=""/>
             <label for="Phone">Phone</label>
             <datalist id="Phones">
                 <!-- Options will be added dynamically -->
@@ -250,12 +272,14 @@
                 <!-- Options will be added dynamically -->
             </datalist>
         </div>
-        <div class="txtt">
-            <h3>Event 1</h3>
-        </div>
+            <div class="stu">
+            <p>Student Can Purchase Maximum 2 Event Only</p>
+            </div>
+            <div class="txtt">
+            <h6>Event 1</h6>
             <div class="m-dropdown">
                 <select class="e-select" name="Dropdown" id="Dropdown" name="Dropdown" list="Dropdowns" required="">
-                  <option value="" disabled selected style="display:none;">Select an item</option>
+                  <option value="" disabled selected style="display:none;">Select an Event</option>
                       <optgroup label="Technical ">
                         <option>a</option>
                         <option>b</option>
@@ -271,8 +295,34 @@
                       <datalist id="Dropdowns">
                         <!-- Options will be added dynamically -->
                     </datalist>
-                </select>          
+                </select>
+            </div>
+                <h6>Event 2</h6>
+                <div class="m-dropdown">
+                <select class="e-select" name="Dropdown" id="Dropdown" name="Dropdown" list="Dropdowns" required="">
+                    <option value="" disabled selected style="display:none;">Select an Event</option>
+                        <optgroup label="Technical ">
+                          <option>a</option>
+                          <option>b</option>
+                          <option>c</option>
+                          <option>d</option>
+                        </optgroup>
+                        <optgroup label="Non Technical">
+                          <option>aa</option>
+                          <option>bb</option>
+                          <option>cc</option>
+                          <option>dd</option>
+                        </optgroup>
+                        <optgroup label="Only one Event">
+                            <option>Nil</option>
+                          </optgroup>
+                        <datalist id="Dropdowns">
+                          <!-- Options will be added dynamically -->
+                      </datalist>
+                  </select>  
+                </div>        
         </div>
+    
         <button type="button" class="btn btn-primary" id="razorpayBtn">Pay</button>
     </form>
     </center>
@@ -284,9 +334,9 @@
     <button type="button" class="btn-close" onclick="closeSuccessPopup()"></button>
 </div>
 <!-- Snackbar for error handling -->
-<div id="snackbar">Error submitting form. Please try again later.</div>
+<div id="snackbar"></div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+<script
 $(document).ready(function() {
   $(".e-select").on("change", function() {
     var selectedValue = $(this).val();
