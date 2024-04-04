@@ -14,7 +14,8 @@
 
         body {
             margin: 0;
-            padding: 0;
+            height: 100%;
+            padding: auto;
             font-family: sans-serif;
             background: linear-gradient(#141e30, #243b55);
         }
@@ -38,17 +39,25 @@
             color: #fff;
             text-align: center;
         }
-
+        .login-box {
+    /* Other styles */
+    height: 100vh; /* Set a fixed height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+.login-box::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+}
         .login-box .user-box {
             position: relative;
         }
 
         .login-box .user-box input {
             width: 100%;
+            height: 100%;
             padding: 10px 0;
             font-size: 16px;
             color: #fff;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
             border: none;
             border-bottom: 1px solid #fff;
             outline: none;
@@ -72,9 +81,7 @@
             padding: 10px 0;
             font-size: 16px;
             color: #fff;
-            margin-bottom: 15px;
             border: none;
-            border-bottom: 1px solid #fff;
             outline: none;
             background: transparent;
             margin: 0 0 15px;
@@ -106,6 +113,11 @@
             transition: .5s;
             margin-top: 40px;
             letter-spacing: 4px
+        }
+        
+        .line{
+            border-bottom: 1px solid #fff;
+            margin-bottom: 15px;
         }
 
         .login-box a:hover  {
@@ -215,7 +227,7 @@
                 0 0 100px #03e9f4;
         }
         .m-dropdown{
-  margin:13px auto;
+  margin: 15px auto ;
   width:100%;
   
   select {
@@ -267,11 +279,45 @@
         </div>
         <div class="user-box">
             <input type="Message" id="Message" name="Message" list="Messages" required=""/>
+            <label for="Message">College Name</label>
+            <datalist id="Messages">
+                <!-- Options will be added dynamically -->
+            </datalist>
+        </div>
+        <div class="user-box">
+            <input type="Message" id="Message" name="Message" list="Messages" required=""/>
+            <label for="Message">Department</label>
+            <datalist id="Messages">
+                <!-- Options will be added dynamically -->
+            </datalist>
+        </div>
+        <div class="user-box">
+            <input type="Message" id="Message" name="Message" list="Messages" required=""/>
             <label for="Message">Message</label>
             <datalist id="Messages">
                 <!-- Options will be added dynamically -->
             </datalist>
         </div>
+        <div class="line">
+        <div class="m-dropdown">
+            <div class="txtt">
+                <h6>current study in year</h6>
+            </div>
+            <select class="e-select" name="Dropdown" id="Dropdown" name="Dropdown" list="Dropdowns" required="">
+              <option value="" disabled selected style="display:none;">Select an Year</option>
+                  <optgroup label="Year ">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </optgroup>
+                  <datalist id="Dropdowns">
+                    <!-- Options will be added dynamically -->
+                </datalist>
+            </select>
+        </div>
+    </div>
             <div class="stu">
             <p>Student Can Purchase Maximum 2 Event Only</p>
             </div>
