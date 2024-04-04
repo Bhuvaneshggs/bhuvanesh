@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Form with UPI Payment Button</title>
+    <style>
+        /* Style the button to look like a UPI payment button */
+        .upi-payment-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+    </style>
+    <script>
+        function onSubmitForm() {
+            // Display thank you message
+            document.getElementById("thank-you-message").style.display = "block";
+            // Disable the submit button
+            document.getElementById("submit-button").disabled = true;
+            // You can add more actions here if needed
+        }
+    </script>
+</head>
+<body>
+    <h2>UPI Payment Form</h2>
+    <form action="/upi-payment" method="post" onsubmit="onSubmitForm()">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        
+        <label for="amount">Amount:</label><br>
+        <input type="number" id="amount" name="amount" required><br>
+        
+        <!-- UPI Payment Button -->
+        <button type="submit" id="submit-button" class="upi-payment-button">Make UPI Payment</button>
+    </form>
+    <!-- Thank you message -->
+    <div id="thank-you-message" style="display: none;">
+        Thank you for your payment!
+    </div>
+</body>
+</html>
