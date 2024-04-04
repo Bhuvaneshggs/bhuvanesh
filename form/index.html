@@ -491,7 +491,9 @@ form.addEventListener('input', toggleOfflinePaymentButton);
                     // Reset the submit button
                     razorpayBtn.disabled = true;
                     razorpayBtn.innerHTML = 'Pay Online';
+                    offlinePaymentBtn.disabled = true;
                     offlinePaymentBtn.innerHTML = 'Pay Offline';
+                    form.reset();
                 } else {
                     throw new Error('Network response was not ok');
                 }
