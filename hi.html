@@ -19,9 +19,9 @@ function initiatePayment() {
   // Redirect to payment URL
   window.location.href = paymentURL;
   
-  // After payment, show a pop-up confirmation (this will not work automatically due to browser security restrictions)
+  // Reset the page after a delay
   setTimeout(function() {
-    alert("Payment completed successfully!");
+    location.reload();
   }, 5000); // Adjust the timeout as needed
 }
 </script>
