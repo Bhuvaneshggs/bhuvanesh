@@ -11,10 +11,7 @@ function initiatePayment() {
   var amount = document.getElementById("amount").value;
   
   // Construct payment URL
-  var paymentURL = "upi://pay?pa=" + encodeURIComponent(upiID) +
-                   "&pn=" + encodeURIComponent(name) +
-                   "&am=" + encodeURIComponent(amount) +
-                   "&cu=INR";
+  var paymentURL = "upi://pay?pa=" + encodeURIComponent(upiID) + "pn=" + encodeURIComponent(name) + "&am=" + encodeURIComponent(amount) + "&cu=INR";
   
   // Redirect to payment URL
   window.location.href = paymentURL;
