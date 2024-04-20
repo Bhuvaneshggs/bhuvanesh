@@ -4,22 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UPI Payment</title>
-</head>
-<body>
-
-<form id="paymentForm">
-  <label for="amount">Enter Amount:</label>
-  <input type="text" id="amount" name="amount" required>
-  <br>
-  <button type="button" onclick="generatePaymentLink()">Generate Payment Link</button>
-</form>
-
-<div id="paymentLink" style="display: none;">
-  <a id="paymentURL" target="_blank"></a>
-</div>
-
 <script>
-function generatePaymentLink() {
+function initiatePayment() {
   var upiID = "9597916799@paytm";
   var name = "Bhuvanesh Gopal";
   var amount = document.getElementById("amount").value;
@@ -30,12 +16,24 @@ function generatePaymentLink() {
                    "&am=" + encodeURIComponent(amount) +
                    "&cu=INR";
   
-  // Display payment link
-  document.getElementById("paymentURL").href = paymentURL;
-  document.getElementById("paymentURL").innerText = "Click here to pay";
-  document.getElementById("paymentLink").style.display = "block";
+  // Redirect to payment URL
+  window.location.href = paymentURL;
+  
+  // After payment, show a pop-up confirmation (this will not work automatically due to browser security restrictions)
+  setTimeout(function() {
+    alert("Payment completed successfully!");
+  }, 5000); // Adjust the timeout as needed
 }
 </script>
+</head>
+<body>
+
+<form id="paymentForm">
+  <label for="amount">Enter Amount:</label>
+  <input type="text" id="amount" name="amount" required>
+  <br>
+  <button type="button" onclick="initiatePayment()">Pay Now</button>
+</form>
 
 </body>
 </html>
