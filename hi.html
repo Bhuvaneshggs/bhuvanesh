@@ -14,9 +14,7 @@ function initiatePayment() {
   var paymentURL = "upi://pay?pa=bhuvanesh2228895-3@okicici&pn=Bhuvanesh G&aid=uGICAgIDdl7naKA"
 + "&am=" + encodeURIComponent(amount)";
   
-  // Redirect to payment URL
-  window.location.href = paymentURL;
-  
+
   // After payment, show a pop-up confirmation (this will not work automatically due to browser security restrictions)
   setTimeout(function() {
     alert("Payment completed successfully!");
