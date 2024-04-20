@@ -11,10 +11,11 @@ function initiatePayment() {
   var amount = document.getElementById("amount").value;
 
   // Construct payment URL
-  var paymentURL = "upi://pay?pa=bhuvanesh2228895-3@okicici&pn=Bhuvanesh G&aid=uGICAgIDdl7naKA"
-+ "&am=" + encodeURIComponent(amount)";
+  var paymentURL = "upi://pay?pa=bhuvanesh2228895-3@okicici&pn=Bhuvanesh%20Gopal" 
++ "&am=" + encodeURIComponent(amount)"
++ "&aid=uGICAgIDdl7naKA";
   
-
+window.location.href = paymentURL;
   // After payment, show a pop-up confirmation (this will not work automatically due to browser security restrictions)
   setTimeout(function() {
     alert("Payment completed successfully!");
