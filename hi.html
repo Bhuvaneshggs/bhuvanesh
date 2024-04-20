@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPI Payment</title>
+<title>Google Pay Payment</title>
 </head>
 <body>
 
@@ -11,29 +11,29 @@
   <label for="amount">Enter Amount:</label>
   <input type="text" id="amount" name="amount" required>
   <br>
-  <button type="submit">Pay Now</button>
+  <button type="button" onclick="processPayment()">Pay Now with Google Pay</button>
 </form>
 
-<div id="confirmation" style="display: none;">
-  Payment Successful! Thank you.
-</div>
-
 <script>
-document.getElementById("paymentForm").addEventListener("submit", function(event) {
-  event.preventDefault();
+function processPayment() {
   var amount = document.getElementById("amount").value;
-  var upiID = "9597916799@paytm"; // Your UPI ID
-  // Here you can add code to initiate the payment using your preferred method (e.g., API call to payment gateway)
-
-  // Simulating successful payment
-  setTimeout(function() {
-    document.getElementById("paymentForm").reset();
-    document.getElementById("confirmation").style.display = "block";
-    setTimeout(function() {
-      document.getElementById("confirmation").style.display = "none";
-    }, 3000); // Hide confirmation after 3 seconds
-  }, 2000); // Simulating 2 seconds for payment processing
-});
+  var upiID = "9597916799@paytm"; // Your UPI ID or Paytm ID
+  var transactionId = "123456789"; // Unique transaction ID
+  var callbackUrl = "https://yourwebsite.com/checkout/callback"; // Callback URL
+  
+  // Construct payment URL
+  var paymentUrl = "https://pay.google.com/gp/v/gateway/checkout?" +
+                   "pa=" + encodeURIComponent(upiID) +
+                   "&pn=" + encodeURIComponent("Merchant Name") +
+                   "&tr=" + encodeURIComponent(transactionId) +
+                   "&url=" + encodeURIComponent(callbackUrl) +
+                   "&mc=" + encodeURIComponent(amount) +
+                   "&tn=" + encodeURIComponent("Payment Description") +
+                   "&cu=" + encodeURIComponent("INR");
+  
+  // Redirect user to payment URL
+  window.location.href = paymentUrl;
+}
 </script>
 
 </body>
