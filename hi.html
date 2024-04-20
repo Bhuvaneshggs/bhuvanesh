@@ -21,7 +21,7 @@ function initiatePayment() {
   var amount = document.getElementById("amount").value;
   
   // Construct payment URL
-  var paymentURL = "upi://pay?mode=02&pa=" + encodeURIComponent(upiID) + "&purpose=00&mc=7299&pn=PhonePeMerchant&orgid=180001&sign=MEUCIQCGaQP1ie1q2NO1ZpUCVbKdPTRv1G/GUnyagc82B+yIqwIgU6qlu3kOacke/Hv8x5qskZZQTBP/aTRutAvQQK2Xn+g=";
+  var paymentURL = "upi://pay?mode=02&pa=" + encodeURIComponent(upiID) +"&am=" + encodeURIComponent(amount) +"&cu=INR"+ "&purpose=00&mc=7299&pn=PhonePeMerchant&orgid=180001&sign=MEUCIQCGaQP1ie1q2NO1ZpUCVbKdPTRv1G/GUnyagc82B+yIqwIgU6qlu3kOacke/Hv8x5qskZZQTBP/aTRutAvQQK2Xn+g=";
   
   // Redirect to payment URL
   window.location.href = paymentURL;
