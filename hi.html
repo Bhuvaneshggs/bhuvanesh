@@ -3,36 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Google Pay Payment</title>
+<title>UPI Payment</title>
 </head>
 <body>
 
 <form id="paymentForm">
+  <label for="upiID">Enter UPI ID:</label>
+  <input type="text" id="upiID" name="upiID" required>
+  <br>
+  <label for="name">Enter Name:</label>
+  <input type="text" id="name" name="name" required>
+  <br>
   <label for="amount">Enter Amount:</label>
   <input type="text" id="amount" name="amount" required>
   <br>
-  <button type="button" onclick="processPayment()">Pay Now with Google Pay</button>
+  <button type="button" onclick="generatePaymentLink()">Generate Payment Link</button>
 </form>
 
+<div id="paymentLink" style="display: none;">
+  <a id="paymentURL" target="_blank"></a>
+</div>
+
 <script>
-function processPayment() {
+function generatePaymentLink() {
+  var upiID = document.getElementById("upiID").value;
+  var name = document.getElementById("name").value;
   var amount = document.getElementById("amount").value;
-  var upiID = "9597916799@paytm"; // Your UPI ID or Paytm ID
-  var transactionId = "123456789"; // Unique transaction ID
-  var callbackUrl = "https://yourwebsite.com/checkout/callback"; // Callback URL
   
   // Construct payment URL
-  var paymentUrl = "https://pay.google.com/gp/v/gateway/checkout?" +
-                   "pa=" + encodeURIComponent(upiID) +
-                   "&pn=" + encodeURIComponent("Merchant Name") +
-                   "&tr=" + encodeURIComponent(transactionId) +
-                   "&url=" + encodeURIComponent(callbackUrl) +
-                   "&mc=" + encodeURIComponent(amount) +
-                   "&tn=" + encodeURIComponent("Payment Description") +
-                   "&cu=" + encodeURIComponent("INR");
+  var paymentURL = "upi://pay?pa=" + encodeURIComponent(upiID) +
+                   "&pn=" + encodeURIComponent(name) +
+                   "&am=" + encodeURIComponent(amount) +
+                   "&cu=INR" +
+                   "&aid=uGICAgIDdl7naKA";
   
-  // Redirect user to payment URL
-  window.location.href = paymentUrl;
+  // Display payment link
+  document.getElementById("paymentURL").href = paymentURL;
+  document.getElementById("paymentURL").innerText = "Click here to pay";
+  document.getElementById("paymentLink").style.display = "block";
 }
 </script>
 
