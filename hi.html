@@ -4,28 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UPI Payment</title>
-<script>
-// Function to read URL parameters
-function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-}
-
-// Function to show payment confirmation popup
-function showPaymentConfirmation() {
-    var paymentStatus = getUrlParameter('payment_status');
-    if (paymentStatus === 'success') {
-        alert("Payment completed successfully!");
-    }
-}
-
-// Show payment confirmation popup when the page loads
-window.onload = function() {
-    showPaymentConfirmation();
-};
-</script>
 </head>
 <body>
 
@@ -35,6 +13,33 @@ window.onload = function() {
   <br>
   <button type="button" onclick="initiatePayment()">Pay Now</button>
 </form>
+
+<script>
+function initiatePayment() {
+  var upiID = "9597916799@paytm";
+  var name = "Bhuvanesh Gopal";
+  var amount = document.getElementById("amount").value;
+  
+  // Construct payment URL
+  var paymentURL = "upi://pay?pa=" + encodeURIComponent(upiID) +
+                   "&pn=" + encodeURIComponent(name) +
+                   "&am=" + encodeURIComponent(amount) +
+                   "&cu=INR";
+  
+  // Redirect to payment URL
+  window.location.href = paymentURL;
+  
+  // Show notification upon return
+  setTimeout(function() {
+    resetPage();
+    alert("Payment success!");
+  }, 5000); // Adjust the timeout as needed
+}
+
+function resetPage() {
+  document.getElementById("paymentForm").reset();
+}
+</script>
 
 </body>
 </html>
