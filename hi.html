@@ -16,12 +16,13 @@
 
 <script>
 function initiatePayment() {
-  var upiID = "9597916799@paytm";
-  var name = "Bhuvanesh";
+  var upiID = "Q333504136@ybl";
+  var name = "PhonePeMerchant";
   var amount = document.getElementById("amount").value;
   
   // Construct payment URL
-  var paymentURL = "upi://pay?pa=" + encodeURIComponent(upiID) +
+  var paymentURL = "upi://pay?mode=02&pa=" + encodeURIComponent(upiID) +
+"&=00&mc=7299"+
                    "&pn=" + encodeURIComponent(name) +
                    "&am=" + encodeURIComponent(amount) +
                    "&cu=INR";
