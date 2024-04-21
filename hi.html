@@ -23,8 +23,7 @@ function initiatePayment() {
   // Construct payment URL
   var paymentURL = "upi://pay?&pa=" + encodeURIComponent(upiID) +
                    "&pn=" + encodeURIComponent(name) +
-                   "&am=" + encodeURIComponent(amount) +
-                   "&orgid=180001&sign=MEUCIQCGaQP1ie1q2NO1ZpUCVbKdPTRv1G/GUnyagc82B+yIqwIgU6qlu3kOacke/Hv8x5qskZZQTBP/aTRutAvQQK2Xn+g=";
+                   "&am=" + encodeURIComponent(amount)";
   
   // Redirect to payment URL
   window.location.href = paymentURL;
