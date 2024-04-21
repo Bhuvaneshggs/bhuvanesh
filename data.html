@@ -6,15 +6,14 @@
 <title>UPI Payment</title>
 <script>
 function initiatePayment() {
-  var upiID = "9597916799@paytm";
+  var upiID = "9597916799@upi";
   var name = "Bhuvanesh Gopal";
   var amount = document.getElementById("amount").value;
   
   // Construct payment URL
   var paymentURL = "upi://pay?pa=" + encodeURIComponent(upiID) +
                    "&pn=" + encodeURIComponent(name) +
-                   "&am=" + encodeURIComponent(amount) +
-                   "&cu=INR";
+                   "&am=" + encodeURIComponent(amount);
   
   // Redirect to payment URL
   window.location.href = paymentURL;
