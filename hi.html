@@ -17,12 +17,11 @@
 <script>
 function initiatePayment() {
   var upiID = "Q333504136@ybl";
-  var name = "PhonePeMerchant";
+  var name = "Bhuvanesh Gopal";
   var amount = document.getElementById("amount").value;
   
   // Construct payment URL
-  var paymentURL = "upi://pay?mode=02&pa=" + encodeURIComponent(upiID) +
-"&=00&mc=7299"+
+  var paymentURL = "upi://pay?&pa=" + encodeURIComponent(upiID) +
                    "&pn=" + encodeURIComponent(name) +
                    "&am=" + encodeURIComponent(amount) +
                    "&orgid=180001&sign=MEUCIQCGaQP1ie1q2NO1ZpUCVbKdPTRv1G/GUnyagc82B+yIqwIgU6qlu3kOacke/Hv8x5qskZZQTBP/aTRutAvQQK2Xn+g=";
