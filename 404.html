@@ -1,63 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Redirecting...</title>
-<meta http-equiv="refresh" content="10;url=/">
-<style>
-/* CSS styles as provided */
-.page_404 {
-    padding: 40px 0;
-    background: #fff;
-    font-family: 'Arvo', serif;
-}
-.page_404 img {
-    width: 100%;
-}
-.four_zero_four_bg {
-    background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
-    height: 400px;
-    background-position: center;
-}
-.four_zero_four_bg h1 {
-    font-size: 80px;
-}
-.four_zero_four_bg h3 {
-    font-size: 80px;
-}
-.link_404 {
-    color: #fff!important;
-    padding: 10px 20px;
-    background: #39ac31;
-    margin: 20px 0;
-    display: inline-block;
-}
-.contant_box_404 {
-    margin-top: -50px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .top use {
+            fill: white;
+        }
+        &:active {
+            .top use {
+                fill: darken(#FF0000, 15%);
+            }
+        }
+        @-moz-document url-prefix() {
+            main {
+                > div {
+                    &:nth-child(3) {
+                        a {
+                            &:hover, &:focus {
+                                animation: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        @keyframes slideDown {
+            0% { transform: translateY(-20%); }
+            100% { transform: none; }
+        }
+        @keyframes slideUp {
+            0% { transform: translateY(20%); }
+            100% { transform: none; }
+        }
+        @keyframes slideRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: none; }
+        }
+        @keyframes slideLeft {
+            0% { transform: translateX(50%); }
+            100% { transform: none; }
+        }
+        @keyframes slideLeftSmall {
+            0% { transform: translateX(10%); }
+            100% { transform: none; }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-<section class="page_404">
-    <div class="container">
-        <div class="row">    
-            <div class="col-sm-12">
-                <div class="col-sm-10 col-sm-offset-1 text-center">
-                    <div class="four_zero_four_bg">
-                        <h1 class="text-center">404</h1>
-                    </div>
-                    <div class="contant_box_404">
-                        <h3 class="h2">
-                            Look like you're lost
-                        </h3>
-                        <p>The page you are looking for is not available!</p>
-                        <a href="/" class="link_404">Auto Redirecting to Home Page 10s</a>
-                    </div>
-                </div>
-            </div>
+    <main>
+        <div>
+            <svg width="636px" viewBox="-100 0 536 190" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <defs>
+                    <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="stroke-glow">
+                        <feMorphology radius="1" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+                        <feOffset dx="0" dy="0" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+                        <feMorphology radius="1" operator="erode" in="SourceAlpha" result="shadowInner"></feMorphology>
+                        <feOffset dx="0" dy="0" in="shadowInner" result="shadowInner"></feOffset>
+                        <feComposite in="shadowOffsetOuter1" in2="shadowInner" operator="out" result="shadowOffsetOuter1"></feComposite>
+                        <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                        <feColorMatrix values="0 0 0 0 0.793633078   0 0 0 0 0.184316773   0 0 0 0 0.184316773  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                        <feMorphology radius="1" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter2"></feMorphology>
+                        <feOffset dx="0" dy="0" in="shadowSpreadOuter2" result="shadowOffsetOuter2"></feOffset>
+                        <feMorphology radius="1" operator="erode" in="SourceAlpha" result="shadowInner"></feMorphology>
+                        <feOffset dx="0" dy="0" in="shadowInner" result="shadowInner"></feOffset>
+                        <feComposite in="shadowOffsetOuter2" in2="shadowInner" operator="out" result="shadowOffsetOuter2"></feComposite>
+                        <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter2" result="shadowBlurOuter2"></feGaussianBlur>
+                        <feColorMatrix values="0 0 0 0 1   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowBlurOuter2" result="shadowMatrixOuter2"></feColorMatrix>
+                        <feMerge></feMerge>
+                    </filter>
+                </defs>
+                <!-- SVG content goes here -->
+            </svg>
         </div>
-    </div>
-</section>
+        <div>
+            <a href="/">Go Home</a>
+        </div>
+    </main>
 </body>
 </html>
