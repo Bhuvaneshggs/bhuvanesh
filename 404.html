@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 — Page Not Found | Bhuvanesh Gopal</title>
+  <meta http-equiv="refresh" content="10;url=/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="jpg" href="logo.jpg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-bg: #02153f;
+      --dark-surface: #051d54;
+      --dark-border: rgba(255,255,255,0.07);
+      --dark-text: #e8edf8;
+      --dark-muted: #8fa3c8;
+      --dark-accent: #4b8fff;
+      --dark-accent2: #00d4ff;
+      --dark-glow: rgba(75,143,255,0.18);
+
+      --light-bg: #f0f4ff;
+      --light-surface: #ffffff;
+      --light-border: rgba(2,21,63,0.09);
+      --light-text: #02153f;
+      --light-muted: #4a5f8a;
+      --light-accent: #1a56db;
+      --light-accent2: #0099cc;
+      --light-glow: rgba(26,86,219,0.10);
+    }
+    @media (prefers-color-scheme: dark) {
+      html[data-theme="auto"] {
+        --bg: var(--dark-bg); --surface: var(--dark-surface); --border: var(--dark-border);
+        --text: var(--dark-text); --muted: var(--dark-muted); --accent: var(--dark-accent);
+        --accent2: var(--dark-accent2); --glow: var(--dark-glow);
+      }
+    }
+    @media (prefers-color-scheme: light) {
+      html[data-theme="auto"] {
+        --bg: var(--light-bg); --surface: var(--light-surface); --border: var(--light-border);
+        --text: var(--light-text); --muted: var(--light-muted); --accent: var(--light-accent);
+        --accent2: var(--light-accent2); --glow: var(--light-glow);
+      }
+    }
+    html[data-theme="dark"] {
+      --bg: var(--dark-bg); --surface: var(--dark-surface); --border: var(--dark-border);
+      --text: var(--dark-text); --muted: var(--dark-muted); --accent: var(--dark-accent);
+      --accent2: var(--dark-accent2); --glow: var(--dark-glow);
+    }
+    html[data-theme="light"] {
+      --bg: var(--light-bg); --surface: var(--light-surface); --border: var(--light-border);
+      --text: var(--light-text); --muted: var(--light-muted); --accent: var(--light-accent);
+      --accent2: var(--light-accent2); --glow: var(--light-glow);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    /* noise */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+    /* grid */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* blobs */
+    .blob {
+      position: fixed; border-radius: 50%;
+      filter: blur(90px); opacity: 0.15; pointer-events: none; z-index: 0;
+      animation: blobFloat 9s ease-in-out infinite alternate;
+    }
+    .blob1 { width: 480px; height: 480px; background: var(--accent); top: -120px; right: -80px; }
+    .blob2 { width: 360px; height: 360px; background: var(--accent2); bottom: -80px; left: -60px; animation-delay: 4s; }
+    @keyframes blobFloat { from{transform:translateY(0)scale(1)} to{transform:translateY(28px)scale(1.06)} }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(2,21,63,0.55);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.4s;
+    }
+    html[data-theme="light"] nav { background: rgba(240,244,255,0.75); }
+    @media(prefers-color-scheme:light){ html[data-theme="auto"] nav { background: rgba(240,244,255,0.75); } }
+    .nav-logo {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem;
+      color: var(--accent); text-decoration: none; letter-spacing: -0.02em;
+    }
+    .theme-toggle {
+      width: 44px; height: 24px; border-radius: 999px;
+      background: var(--border); border: 1px solid var(--border);
+      cursor: pointer; position: relative; display: flex; align-items: center; padding: 3px;
+      transition: background 0.3s;
+    }
+    .theme-toggle-thumb {
+      width: 18px; height: 18px; border-radius: 50%; background: var(--accent);
+      transition: transform 0.3s;
+    }
+
+    /* MAIN */
+    .wrapper {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:none} }
+
+    /* Giant 404 */
+    .giant-404 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(8rem, 22vw, 18rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--accent) 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradShift 4s ease infinite;
+      position: relative;
+      user-select: none;
+    }
+    @keyframes gradShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+
+    /* glitch effect on 404 */
+    .giant-404::before,
+    .giant-404::after {
+      content: '404';
+      position: absolute; inset: 0;
+      font-family: 'Syne', sans-serif;
+      font-size: inherit;
+      font-weight: 800;
+      letter-spacing: inherit;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .giant-404::before {
+      background: var(--accent);
+      animation: glitch1 3.5s infinite;
+      clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+    }
+    .giant-404::after {
+      background: var(--accent2);
+      animation: glitch2 3.5s infinite;
+      clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+    }
+    @keyframes glitch1 {
+      0%,90%,100%{transform:none;opacity:0}
+      92%{transform:translateX(-4px) skewX(-4deg);opacity:0.7}
+      94%{transform:translateX(4px) skewX(4deg);opacity:0.5}
+      96%{transform:none;opacity:0}
+    }
+    @keyframes glitch2 {
+      0%,88%,100%{transform:none;opacity:0}
+      90%{transform:translateX(6px) skewX(3deg);opacity:0.6}
+      93%{transform:translateX(-4px);opacity:0.4}
+      95%{transform:none;opacity:0}
+    }
+
+    .error-label {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--glow); border: 1px solid var(--accent);
+      border-radius: 999px; padding: 0.35rem 1rem;
+      font-size: 0.78rem; color: var(--accent); font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      animation: fadeUp 0.8s 0.25s ease both;
+    }
+
+    .sub {
+      color: var(--muted); font-size: 1rem; max-width: 420px;
+      line-height: 1.6; margin-bottom: 2rem;
+      animation: fadeUp 0.8s 0.35s ease both;
+    }
+
+    /* countdown ring */
+    .countdown-wrap {
+      position: relative; width: 120px; height: 120px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+    .countdown-svg {
+      width: 120px; height: 120px;
+      transform: rotate(-90deg);
+    }
+    .countdown-track {
+      fill: none;
+      stroke: var(--border);
+      stroke-width: 4;
+    }
+    .countdown-ring {
+      fill: none;
+      stroke: url(#ringGrad);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-dasharray: 320;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+    .countdown-num {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .countdown-sec {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem; font-weight: 800;
+      color: var(--accent); line-height: 1;
+    }
+    .countdown-txt {
+      font-size: 0.7rem; color: var(--muted); font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    /* redirect bar */
+    .redirect-bar {
+      width: 100%; max-width: 340px;
+      height: 4px; border-radius: 999px;
+      background: var(--border); overflow: hidden;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s 0.5s ease both;
+    }
+    .redirect-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 999px;
+      width: 100%;
+      transform-origin: left;
+      animation: drainBar 10s linear forwards;
+    }
+    @keyframes drainBar { from{transform:scaleX(1)} to{transform:scaleX(0)} }
+
+    /* redirect label */
+    .redirect-label {
+      color: var(--muted); font-size: 0.88rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s 0.55s ease both;
+    }
+    .redirect-label a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .redirect-label a:hover { text-decoration: underline; }
+
+    /* buttons */
+    .btns {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 0.8s 0.65s ease both;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; border-radius: 999px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+      text-decoration: none; cursor: pointer; border: none; transition: all 0.25s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; box-shadow: 0 4px 20px var(--glow);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--glow); }
+    .btn-outline {
+      background: transparent; color: var(--accent); border: 1px solid var(--accent);
+    }
+    .btn-outline:hover { background: var(--glow); transform: translateY(-2px); }
+
+    /* floating particles */
+    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .particle {
+      position: absolute; border-radius: 50%;
+      background: var(--accent); opacity: 0;
+      animation: particleFly linear infinite;
+    }
+    @keyframes particleFly {
+      0%   { opacity:0; transform: translateY(0) scale(0); }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.2; }
+      100% { opacity:0; transform: translateY(-100vh) scale(1.5); }
+    }
+
+    /* lost astronaut illustration */
+    .astro {
+      font-size: 4rem; margin-bottom: 0.5rem;
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  </style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+
+<!-- Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://bhuvaneshgopal.com" class="nav-logo">BG.</a>
+  <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+    <div class="theme-toggle-thumb"></div>
+  </button>
+</nav>
+
+<!-- MAIN -->
+<div class="wrapper">
+
+  <div class="astro">🧑‍🚀</div>
+
+  <div class="error-label">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Error 404
+  </div>
+
+  <div class="giant-404">404</div>
+
+  <h1>Lost in the void?</h1>
+
+  <p class="sub">Looks like this page drifted off into deep space. Don't worry — we'll beam you back to home base.</p>
+
+  <!-- Countdown Ring -->
+  <div class="countdown-wrap">
+    <svg class="countdown-svg" viewBox="0 0 120 120">
+      <defs>
+        <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#4b8fff"/>
+          <stop offset="100%" stop-color="#00d4ff"/>
+        </linearGradient>
+      </defs>
+      <circle class="countdown-track" cx="60" cy="60" r="51"/>
+      <circle class="countdown-ring" id="ring" cx="60" cy="60" r="51"/>
+    </svg>
+    <div class="countdown-num">
+      <span class="countdown-sec" id="countNum">10</span>
+      <span class="countdown-txt">secs</span>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="redirect-bar"><div class="redirect-fill"></div></div>
+
+  <p class="redirect-label">
+    Redirecting to <a href="\">bhuvaneshgopal.com</a> automatically…
+  </p>
+
+  <div class="btns">
+    <a href="https://bhuvaneshgopal.com" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      Go Home Now
+    </a>
+    <button class="btn btn-outline" id="cancelBtn">Cancel Redirect</button>
+  </div>
+</div>
+
+<script>
+  // ── THEME ──
+  const html = document.documentElement;
+  const toggleBtn = document.getElementById('themeToggle');
+  const thumb = toggleBtn.querySelector('.theme-toggle-thumb');
+  const prefersDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+  function getCurrentTheme() {
+    const t = html.getAttribute('data-theme');
+    if (t === 'dark') return 'dark';
+    if (t === 'light') return 'light';
+    return prefersDark() ? 'dark' : 'light';
+  }
+  function applyThumb() {
+    thumb.style.transform = getCurrentTheme() === 'light' ? 'translateX(20px)' : 'translateX(0)';
+  }
+  toggleBtn.addEventListener('click', () => {
+    html.setAttribute('data-theme', getCurrentTheme() === 'dark' ? 'light' : 'dark');
+    applyThumb();
+  });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyThumb);
+  applyThumb();
+
+  // ── COUNTDOWN + REDIRECT ──
+  const TOTAL = 10;
+  let remaining = TOTAL;
+  let cancelled = false;
+  const ring = document.getElementById('ring');
+  const countNum = document.getElementById('countNum');
+  const circumference = 2 * Math.PI * 51; // ~320.44
+
+  ring.style.strokeDasharray = circumference;
+  ring.style.strokeDashoffset = 0;
+
+  function updateRing() {
+    const offset = circumference * (1 - remaining / TOTAL);
+    ring.style.strokeDashoffset = offset;
+  }
+
+  const timer = setInterval(() => {
+    if (cancelled) return clearInterval(timer);
+    remaining--;
+    countNum.textContent = remaining;
+    updateRing();
+    if (remaining <= 0) {
+      clearInterval(timer);
+      window.location.href = 'https://www.bhuvaneshgopal.com';
+    }
+  }, 1000);
+
+  document.getElementById('cancelBtn').addEventListener('click', () => {
+    cancelled = true;
+    clearInterval(timer);
+    countNum.textContent = '✕';
+    document.querySelector('.redirect-label').innerHTML =
+      'Redirect cancelled. <a href="https://www.bhuvaneshgopal.com">Click here</a> to go home.';
+    document.getElementById('cancelBtn').textContent = 'Redirect Cancelled';
+    document.getElementById('cancelBtn').disabled = true;
+    document.getElementById('cancelBtn').style.opacity = '0.5';
+    document.querySelector('.redirect-fill').style.animation = 'none';
+    document.querySelector('.redirect-fill').style.transform = 'scaleX(0)';
+  });
+
+  // ── PARTICLES ──
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 2;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random() * 100}%;
+      bottom:${Math.random() * -20}%;
+      animation-duration:${6 + Math.random() * 10}s;
+      animation-delay:${Math.random() * 8}s;
+      opacity:0;
+    `;
+    container.appendChild(p);
+  }
+</script>
+</body>
+</html>
