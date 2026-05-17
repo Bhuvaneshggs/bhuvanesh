@@ -150,11 +150,14 @@
       border-bottom: 1px solid var(--border);
       transition: background 0.4s;
     }
-    html[data-theme="light"] nav, html[data-theme="auto"] nav {
-      background: rgba(240,244,255,0.7);
+    html[data-theme="light"] nav {
+      background: rgba(240,244,255,0.75);
     }
     @media (prefers-color-scheme: light) {
-      html[data-theme="auto"] nav { background: rgba(240,244,255,0.7); }
+      html[data-theme="auto"] nav { background: rgba(240,244,255,0.75); }
+    }
+    @media (prefers-color-scheme: dark) {
+      html[data-theme="auto"] nav { background: rgba(2,21,63,0.65); }
     }
 
     .nav-logo {
@@ -199,8 +202,7 @@
       background: var(--accent);
       transition: transform 0.3s;
     }
-    html[data-theme="light"] .theme-toggle-thumb,
-    html[data-theme="auto"].light-active .theme-toggle-thumb { transform: translateX(20px); }
+    /* thumb position is handled entirely by JS - no CSS override needed */
 
     /* ── HERO ── */
     .hero {
@@ -856,7 +858,7 @@
     <div class="contact-grid">
       <a href="mailto:bhuvanesh2228895@gmail.com" class="contact-card">
         <div class="contact-icon">✉️</div>
-        <div><div class="contact-label">Email</div><div class="contact-val">bhuvanesh2228895@gmail.com</div></div>
+        <div><div class="contact-label">Email</div><div class="contact-val">bhuvanesh2228895</div></div>
       </a>
       <a href="tel:+919597916799" class="contact-card">
         <div class="contact-icon">📞</div>
@@ -874,7 +876,7 @@
         <div class="contact-icon">🐙</div>
         <div><div class="contact-label">GitHub</div><div class="contact-val">Bhuvaneshggs</div></div>
       </a>
-      <a href="https://www.bhuvaneshgopal.com" target="_blank" class="contact-card">
+      <a href="/" target="_blank" class="contact-card">
         <div class="contact-icon">🌐</div>
         <div><div class="contact-label">Website</div><div class="contact-val">bhuvaneshgopal.com</div></div>
       </a>
@@ -884,7 +886,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>Designed & built by <a href="https://bhuvaneshgopal.com" target="_blank">Bhuvanesh Gopal</a> All rights reserved</p>
+  <p>Designed & built by <a href="/" target="_blank">Bhuvanesh Gopal</a> · 2025 · All rights reserved</p>
 </footer>
 
 <script>
@@ -892,36 +894,46 @@
   const html = document.documentElement;
   const toggleBtn = document.getElementById('themeToggle');
   const thumb = toggleBtn.querySelector('.theme-toggle-thumb');
+  const navEl = document.querySelector('nav');
 
-  // Detect system preference
-  const prefersDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const sysDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-  function getCurrentTheme() {
+  function getEffectiveTheme() {
     const t = html.getAttribute('data-theme');
     if (t === 'dark') return 'dark';
     if (t === 'light') return 'light';
-    return prefersDark() ? 'dark' : 'light';
+    // auto → follow system
+    return sysDark.matches ? 'dark' : 'light';
   }
 
-  function applyThumbPosition() {
-    const current = getCurrentTheme();
-    if (current === 'light') {
-      thumb.style.transform = 'translateX(20px)';
-    } else {
-      thumb.style.transform = 'translateX(0)';
-    }
+  function applyUI() {
+    const theme = getEffectiveTheme();
+
+    // Thumb position: right = light, left = dark
+    thumb.style.transform = theme === 'light' ? 'translateX(20px)' : 'translateX(0)';
+
+    // Nav background
+    navEl.style.background = theme === 'dark'
+      ? 'rgba(2,21,63,0.65)'
+      : 'rgba(240,244,255,0.75)';
+
+    // Toggle icon title
+    toggleBtn.setAttribute('title', theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode');
   }
 
   toggleBtn.addEventListener('click', () => {
-    const current = getCurrentTheme();
-    const next = current === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    applyThumbPosition();
+    const current = getEffectiveTheme();
+    html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    applyUI();
   });
 
-  // Watch system changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyThumbPosition);
-  applyThumbPosition();
+  // React to OS theme changes (only when data-theme="auto")
+  sysDark.addEventListener('change', () => {
+    if (html.getAttribute('data-theme') === 'auto') applyUI();
+  });
+
+  // Init
+  applyUI();
 
   // ── HAMBURGER ──
   const hamburger = document.getElementById('hamburger');
