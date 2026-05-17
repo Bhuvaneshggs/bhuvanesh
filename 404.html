@@ -7,8 +7,7 @@
   <meta http-equiv="refresh" content="10;url=/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" type="jpg" href="logo.jpg"/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <style>
     :root {
       --dark-bg: #02153f;
@@ -66,7 +65,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       transition: background 0.4s, color 0.4s;
     }
 
@@ -129,7 +129,8 @@
     .wrapper {
       position: relative; z-index: 1;
       display: flex; flex-direction: column; align-items: center;
-      text-align: center; padding: 2rem;
+      text-align: center;
+      padding: 6rem 2rem 3rem;
       animation: fadeUp 0.8s ease both;
     }
     @keyframes fadeUp { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:none} }
@@ -141,16 +142,25 @@
       font-weight: 800;
       line-height: 1;
       letter-spacing: -0.05em;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--accent) 100%);
-      background-size: 200% 200%;
+      background: linear-gradient(135deg,
+        #ffffff 0%,
+        var(--accent) 30%,
+        var(--accent2) 60%,
+        #a78bfa 100%);
+      background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: gradShift 4s ease infinite;
+      animation: nameGrad 6s ease infinite;
+      filter: drop-shadow(0 0 40px rgba(75,143,255,0.25));
       position: relative;
       user-select: none;
     }
-    @keyframes gradShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+    @keyframes nameGrad {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
     /* glitch effect on 404 */
     .giant-404::before,
@@ -199,9 +209,9 @@
     }
 
     h1 {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-      font-weight: 700; letter-spacing: -0.02em;
+      font-weight: 700; letter-spacing: -0.03em;
       margin-bottom: 0.75rem;
       animation: fadeUp 0.8s 0.25s ease both;
     }
@@ -242,8 +252,8 @@
       align-items: center; justify-content: center;
     }
     .countdown-sec {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem; font-weight: 800;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem; font-weight: 700;
       color: var(--accent); line-height: 1;
     }
     .countdown-txt {
@@ -331,7 +341,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="/" class="nav-logo">BG.</a>
+  <a href="/" class="nav-logo">BG</a>
   <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
     <div class="theme-toggle-thumb"></div>
   </button>
@@ -392,22 +402,33 @@
   const html = document.documentElement;
   const toggleBtn = document.getElementById('themeToggle');
   const thumb = toggleBtn.querySelector('.theme-toggle-thumb');
-  const prefersDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
-  function getCurrentTheme() {
+  const navEl = document.querySelector('nav');
+  const sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function getEffectiveTheme() {
     const t = html.getAttribute('data-theme');
     if (t === 'dark') return 'dark';
     if (t === 'light') return 'light';
-    return prefersDark() ? 'dark' : 'light';
+    return sysDark.matches ? 'dark' : 'light';
   }
-  function applyThumb() {
-    thumb.style.transform = getCurrentTheme() === 'light' ? 'translateX(20px)' : 'translateX(0)';
+
+  function applyUI() {
+    const theme = getEffectiveTheme();
+    thumb.style.transform = theme === 'light' ? 'translateX(20px)' : 'translateX(0)';
+    navEl.style.background = theme === 'dark'
+      ? 'rgba(2,21,63,0.65)'
+      : 'rgba(240,244,255,0.75)';
+    toggleBtn.setAttribute('title', theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode');
   }
+
   toggleBtn.addEventListener('click', () => {
-    html.setAttribute('data-theme', getCurrentTheme() === 'dark' ? 'light' : 'dark');
-    applyThumb();
+    html.setAttribute('data-theme', getEffectiveTheme() === 'dark' ? 'light' : 'dark');
+    applyUI();
   });
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyThumb);
-  applyThumb();
+  sysDark.addEventListener('change', () => {
+    if (html.getAttribute('data-theme') === 'auto') applyUI();
+  });
+  applyUI();
 
   // ── COUNTDOWN + REDIRECT ──
   const TOTAL = 10;
@@ -432,7 +453,7 @@
     updateRing();
     if (remaining <= 0) {
       clearInterval(timer);
-      window.location.href = 'https://www.bhuvaneshgopal.com';
+      window.location.href = '/';
     }
   }, 1000);
 
@@ -441,7 +462,7 @@
     clearInterval(timer);
     countNum.textContent = '✕';
     document.querySelector('.redirect-label').innerHTML =
-      'Redirect cancelled. <a href="">Click here</a> to go home.';
+      'Redirect cancelled. <a href="/">Click here</a> to go home.';
     document.getElementById('cancelBtn').textContent = 'Redirect Cancelled';
     document.getElementById('cancelBtn').disabled = true;
     document.getElementById('cancelBtn').style.opacity = '0.5';
